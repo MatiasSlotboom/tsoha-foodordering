@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Manage Account{% endblock %}
+{% block content %}
+<p>Hello {{session["displayname"]}}!</p>
+<p>You can manage your account here and apply to host your restaurant</p>
+<form action="/apply_restaurant", method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <label for="restaurant">Restaurant:</label><br>
+    <input type="text" id="restaurantName" name="restaurantName" required><br>
+    <button type="submit" name="action" value="apply">Apply</button><br>
+</form>
+<p style="color:green;">{{message_restaurant}}</p>
+
+<p>Only authorized personnel may elevate their account to admin using the secret code</p>
+{% if session["isAdmin"] %}
+    <p style="color:green">You have admin privileges!</p>
+{% else %}
+    <form action="/apply_admin", method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="password">Admin password:</label><br>
+        <input type="text" id="password" name="password" required><br>
+        <button type="submit" name="action" value="apply">Apply</button><br>
+    </form>
+    <p style="color:red;">{{message_admin}}</p>
+{% endif %}
+{% endblock %}

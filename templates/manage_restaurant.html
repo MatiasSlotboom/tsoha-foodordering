@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Manage Restaurant{% endblock %}
+{% block content %}
+<p>Hello {{session["displayname"]}}!</p>
+<p>You can add/remove foods here from your restaurants</p>
+{% for restaurant in restaurants %}
+    <form action="/add_food_to_restaurant", method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <p>{{restaurant.name}}</p>
+        <label for="foodName">Food name:</label><br>
+        <input type="text" id="foodName" name="foodName" required><br>
+        <label for="foodDescription">Food description:</label><br>
+        <input type="text" id="foodDescription" name="foodDescription" required><br>
+        <label for="foodPrice">Food price:</label><br>
+        <input type="number" id="foodPrice" name="foodPrice" min="0" required><br>
+        <button type="submit" name="restaurantId" value="{{restaurant.id}}">Apply</button><br>
+    </form>
+{% endfor %}
+{% endblock %}

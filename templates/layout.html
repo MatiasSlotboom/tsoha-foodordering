@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Foodordering</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.min.css">
+
+<div class="container mt-1 ml-0 justify-content-start">
+    <h1>Foodordering</h1>
+    <a href="/">Homepage</a>
+    {% if session["user_id"] %}
+        <a href="/shop">Shop</a>
+        <a href="/manage_account">Manage Account</a>
+    {% endif %}
+    {% if session["hasRestaurant"] == True %}
+        <a href="/manage_restaurant">Manage Restaurant</a>
+    {% endif %}
+    {% if session["isAdmin"] == True %}
+        <a href="/admin_panel">Adminstrator Panel</a>
+    {% endif %}
+</div>
+<hr>
+<div class="d-flex flex-column align-items-center justify-content-center" >
+    {% block content %}{% endblock %}
+</div>
