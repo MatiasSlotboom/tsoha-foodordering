@@ -10,4 +10,5 @@ Users can look through the different restaurants and order from them.
 3. python3 -m venv venv
 4. source venv/bin/activate
 5. pip3 install -r requirements
-6. flask run
+6. Define as environment variables SECRET_KEY with your secret key and ADMIN_PASSWORD as the password that will allow a user to grant themselves admin rights
+7. flask run
