@@ -15,17 +15,13 @@ def getRestaurantsWithFood():
     try:
         parsedRestaurantData = []
         restaurantNamesAndIds = getRestaurants()
-        #print(restaurantNamesAndIds)
         for restaurant in restaurantNamesAndIds:
             sql = text("SELECT f.name AS foodName, f.description AS foodDescription, f.price AS foodPrice FROM Restaurants r JOIN Foods f ON r.id = f.restaurantId WHERE r.id=:restaurantId")
             result = db.session.execute(sql, {"restaurantId":restaurant.id})
             foods = result.fetchall()
             if len(foods) == 0:
                 continue
-            #print("PYTHON IS BAD")
-            #print("Foods", foods)
             parsedRestaurantData.append([restaurant.name, foods])
-            #print("I AM AN ACTUAL COMPETENT REAL LANGUAGE AND CAN PERFORM BASIC APPENDATION")
         return parsedRestaurantData
     except Exception as ex:
         print(ex)
@@ -39,6 +35,15 @@ def getRestaurantsOwnedByUser(userId):
         return restaurants
     except:
         return []
+
+def getRestaurantId(restaurantName):
+    try:
+        sql = text("SELECT r.id FROM Restaurants r WHERE r.name=:restaurantName")
+        result = db.session.execute(sql, {"restaurantName":restaurantName})
+        restaurantId = result.fetchone()[0]
+        return restaurantId
+    except:
+        return 0
 
 def apply_restaurant(restaurantName, username):
     try:

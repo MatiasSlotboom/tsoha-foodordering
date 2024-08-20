@@ -1,6 +1,8 @@
 from flask import redirect, render_template, request
 import user
 import restaurants
+import orders
+
 from app import app
 
 @app.route('/')
@@ -33,7 +35,7 @@ def admin_accept_restaurant():
 @app.route('/order_food', methods=['POST'])
 def order_food():
     if user.user_id():
-        print(request.form)
+        orders.addOrder(request.form, user.user_id())
         return redirect("/shop")
     else:
         return redirect("/")
@@ -42,6 +44,15 @@ def order_food():
 def shop():
     if user.user_id():
         return render_template("shop.html", restaurants=restaurants.getRestaurantsWithFood())
+    else:
+        return redirect("/")
+    
+@app.route('/orders')
+def see_orders():
+    if user.user_id():
+        return render_template("orders.html", submittedOrders=orders.getAllOrdersByUser(user.user_id()), ordersToUser=orders.getAllOrdersToUser(user.user_id()))
+    else:
+        return redirect("/")
 
 @app.route('/admin_panel')
 def admin_panel():
