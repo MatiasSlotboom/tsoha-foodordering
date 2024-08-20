@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+<p>Hello {{session["displayname"]}}!</p>
+<body>
+    <p></p>
+    <p></p>
+    <p>You can view the orders you placed here!</p>
+
+    {% for order in submittedOrders %}
+        <p>You have ordered {{order[1]}} {{order[0]}} at {{order[2].strftime("%Y-%m-%d %H:%M")}} from {{order[3]}}</p>
+    {% endfor %}
+</body>
+<body>
+    <p></p>
+    <p></p>
+    {% if session["hasRestaurant"] == True or session["isAdmin"] == True %}
+    <p>You can view the orders placed placed to your restaurants here!</p>
+
+    {% for order in ordersToUser %}
+        <p>{{order[4]}} has ordered {{order[1]}} {{order[0]}} at {{order[2].strftime("%Y-%m-%d %H:%M")}} from {{order[3]}}</p>
+    {% endfor %}
+
+    {% endif %}
+</body>
+{% endblock %}
