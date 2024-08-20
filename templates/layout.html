@@ -10,6 +10,7 @@
     <a href="/">Homepage</a>
     {% if session["user_id"] %}
         <a href="/shop">Shop</a>
+        <a href="/orders">Orders</a>
         <a href="/manage_account">Manage Account</a>
     {% endif %}
     {% if session["hasRestaurant"] == True %}

@@ -10,13 +10,13 @@
         <h3 class="mt-4">Restaurant: {{restaurant[0]}}</h3>
         {% for food in restaurant[1] %}
             <div class="mt-1">
-                <h4 class="mt-0">{{food[1]}}</h4>
-                <p class="mt-0">Price: {{food[2]}}</p>
+                <h4 class="mt-0">{{food[0]}}</h4>
+                <p class="mt-0">{{food[1]}}, Price: {{food[2]}}</p>
                 <label for="{{food[1]}}">Quantity:</label><br>
                 <input class="mt-0" type="number" id="{{food[1]}}" name="{{food[1]}}", min="0"><br>
             </div>
         {% endfor %}
-        <button class="btn btn-lg" type="submit" name="restaurantName" value="{{restaurant.name}}">Order</button><br>
+        <button class="btn btn-lg" type="submit" name="restaurantName" value="{{restaurant[0]}}">Order</button><br>
     </form>
 {% endfor %}
 </div>
