@@ -85,8 +85,8 @@ def acceptRestaurantApplication(restaurantName):
     
 def addFoodToRestaurant(foodName, foodDescription, foodPrice, restaurantId):
     try:
-        sql = text("INSERT INTO Foods (name, description, price, foodCategoryId, restaurantId) VALUES(:name, :description, :price, :foodCategoryId, :restaurantId)")
-        db.session.execute(sql, {"name":foodName, "description":foodDescription, "price":foodPrice, "foodCategoryId":1, "restaurantId":restaurantId})
+        sql = text("INSERT INTO Foods (name, description, price, restaurantId) VALUES(:name, :description, :price, :restaurantId)")
+        db.session.execute(sql, {"name":foodName, "description":foodDescription, "price":foodPrice, "restaurantId":restaurantId})
         db.session.commit()
         return True
     except:

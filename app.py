@@ -10,6 +10,3 @@ csrf = CSRFProtect(app)
 
 csrf.init_app(app)
 import routes
-
-import foodCategory
-foodCategory.initialiseFoodCategories()

@@ -19,17 +19,11 @@ CREATE TABLE RestaurantApplications (
     applierId INT REFERENCES Users(id)
 );
 
-CREATE TABLE FoodCategories (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(32) UNIQUE NOT NULL
-);
-
 CREATE TABLE Foods (
     id SERIAL PRIMARY KEY,
     name VARCHAR(32) NOT NULL,
     description VARCHAR(128),
     price DECIMAL(5, 2) NOT NULL,
-    foodCategoryId INT REFERENCES FoodCategories(id),
     restaurantId INT REFERENCES Restaurants(id)
 );
 
